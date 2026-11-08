@@ -11,9 +11,7 @@
   "dependencies": {
     "@faker-js/faker": "^10.6.0",
     "celebrate": "^16.0.0",
-    "cors": "^2.8.6",
-    "express-winston": "^4.2.0",
-    "winston": "^3.19.0"
+    "cors": "^2.8.6"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19"
