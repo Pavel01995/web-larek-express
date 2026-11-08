@@ -1,11 +1,13 @@
-import {Router} from 'express';
-import  {getProduct, createProduct}  from '../controllers/product';
+import { Router } from 'express';
+import { getProduct, createProduct } from '../controllers/product';
+import { validateProductBody } from '../middlewares/validatons';
 
-const router = Router();
-
-  router.get('/', getProduct);
-  router.post('/', createProduct);  
-  
+const productRouter = Router();
 
 
-  export default router;
+
+
+productRouter.get('/', getProduct);
+productRouter.post('/', validateProductBody, createProduct);
+
+export default productRouter;

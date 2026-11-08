@@ -1,16 +1,30 @@
 import express from 'express';
 import cors from 'cors';
 import  mongoose from 'mongoose';
-import Router from './routes/product';
 import path from 'path';
-
+import orderRouter from './routes/order';
+import productRouter from './routes/product';
+import {errors} from 'celebrate';
+import {NotFoundError} from './errors/NotFoundError';
+import {errorHandler} from './middlewares/errorHandler';
+import {requestLogger, errorLogger} from './middlewares/logger';
 
 
 const app = express();
+
 app.use(cors());
+app.use(requestLogger);
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public'))); 
-app.use('/product', Router);
+app.use
+app.use('/product', productRouter);
+app.use('/order', orderRouter);
+app.use((req,res,next)=>{
+  next(new NotFoundError('Маршут не найден'));
+})
+app.use(errorLogger);
+app.use(errors());
+app.use(errorHandler);
 
 const start =async()=>{
 try{
