@@ -9,7 +9,7 @@ export interface IProduct {
 }
 
 const productSchema = new Schema<IProduct>({
-   title: {
+  title: {
     type: String,
     minlength: [2, 'минимальная длина поля title 2 символа'],
     maxlength: [30, 'максимальная длина поля title 30 символов'],
