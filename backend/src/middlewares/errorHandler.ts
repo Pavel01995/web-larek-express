@@ -1,12 +1,14 @@
-import {Request, Response, NextFunction} from 'express';
+import { Request, Response, NextFunction } from 'express';
 
-export const errorHandler =(
+const errorHandler = (
   err:any,
   _req:Request,
   res:Response,
-  _next:NextFunction
-)=>{
+  _next:NextFunction,
+) => {
   const statusCode = err.statusCode || 500;
-  const message = statusCode ===500?  'На сервере произошла ошибка' : err.message;
-  res.status(statusCode).send({message});
-}
+  const message = statusCode === 500 ? 'На сервере произошла ошибка' : err.message;
+  res.status(statusCode).send({ message });
+};
+
+export default errorHandler;

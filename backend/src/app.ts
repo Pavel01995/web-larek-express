@@ -5,8 +5,8 @@ import path from 'path';
 import orderRouter from './routes/order';
 import productRouter from './routes/product';
 import {errors} from 'celebrate';
-import {NotFoundError} from './errors/NotFoundError';
-import {errorHandler} from './middlewares/errorHandler';
+import NotFoundError from './errors/NotFoundError';
+import errorHandler from './middlewares/errorHandler';
 import {requestLogger, errorLogger} from './middlewares/logger';
 
 

@@ -1,6 +1,4 @@
-import mongoose, {model, Schema} from 'mongoose';
-
-
+import mongoose, {Schema} from 'mongoose';
 
 export interface IProduct {
   title: string;
@@ -10,37 +8,33 @@ export interface IProduct {
   price: number|null;
 }
 
-
-
 const productSchema = new Schema<IProduct>({
-  title:{
+  title: {
     type: String,
     minlength: [2, 'минимальная длина поля title 2 символа'],
     maxlength: [30, 'максимальная длина поля title 30 символов'],
     required: [true, 'Поле title должно быть заполнено'],
-    unique: true
+    unique: true,
   },
-  category:{
+  category: {
     type: String,
     required: [true, 'Поле category должно быть заполнено'],
   },
-  image:{
+  image: {
     fileName: { type: String, required: [true, 'Поле fileName обязательно для заполнения'] },
-    originalName: { type: String, required: [true, 'Поле originalName обязательно для заполнения'] }
+    originalName: { type: String, required: [true, 'Поле originalName обязательно для заполнения'] },
   },
-  
-  description:{
+
+  description: {
     type: String,
-    required:false,
-    
-  }, price:{
-type : Number,
-required: false,
-default:null
-  }
+    required: false,
+
+  },
+  price: {
+    type: Number,
+    required: false,
+    default: null,
+  },
 });
-
-  
-
 
 export default mongoose.model<IProduct>('product', productSchema);

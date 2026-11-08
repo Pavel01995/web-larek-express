@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import product from '../models/product';
 import { faker } from '@faker-js/faker';
-import { BadRequestError } from '../errors/BadRequestError';
+import product from '../models/product';
+import BadRequestError from '../errors/BadRequestError';
 
 export enum PaymentType {
   Online = 'online',
@@ -24,22 +24,26 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
     const products = await product.find({ _id: { $in: items } });
 
     if (products.length !== items.length) {
-      return next(new BadRequestError('Некоторые товары не найдены'));
+      next(new BadRequestError('Некоторые товары не найдены'));
+      return;
     }
 
     let calculatedTotal = 0;
-    for (const item of products) {
+    for (let i = 0; i < products.length; i += 1) {
+      const item = products[i];
       if (item.price === null) {
-        return next(new BadRequestError(`Цена товара ${item.title} не указана`));
+        next(new BadRequestError(`Цена товара ${item.title} не указана`));
+        return;
       }
       calculatedTotal += item.price;
     }
 
     if (calculatedTotal !== total) {
-      return next(new BadRequestError('Сумма заказа не совпадает с суммой товаров'));
+      next(new BadRequestError('Сумма заказа не совпадает с суммой товаров'));
+      return;
     }
 
-    return res.status(200).send({
+    res.status(200).send({
       id: faker.string.uuid(),
       total,
     });
