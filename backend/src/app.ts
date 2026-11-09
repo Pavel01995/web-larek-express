@@ -30,12 +30,8 @@ app.use(errors());
 app.use(errorHandler);
 
 const start = async () => {
-  try {
-    await mongoose.connect(DB_ADDRESS);
-    app.listen(Number(PORT), '0.0.0.0');
-  } catch (error) {
-    process.exit(1);
-  }
+  await mongoose.connect(DB_ADDRESS);
+  app.listen(Number(PORT), '0.0.0.0');
 };
 
 start();

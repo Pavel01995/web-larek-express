@@ -7,7 +7,7 @@
     "lint": "npx eslint src/**/*.ts",
     "build": "tsc",
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
-    "start": "ts-node src/app.ts",
+    "start": "ts-node --transpile-only src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "< Укажите здесь автора работы >",
@@ -25,7 +25,7 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "@faker-js/faker": "^10.6.0",
+    "@faker-js/faker": "^8.4.1",
     "celebrate": "^16.0.0",
     "cors": "^2.8.6",
     "express": "^4.19.2",
