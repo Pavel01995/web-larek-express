@@ -1,3 +1,4 @@
+import dotenv from 'dotenv';
 import path from 'path';
 import { errors } from 'celebrate';
 import cors from 'cors';
@@ -8,6 +9,8 @@ import errorHandler from './middlewares/errorHandler';
 import { errorLogger, requestLogger } from './middlewares/logger';
 import orderRouter from './routes/order';
 import productRouter from './routes/product';
+
+dotenv.config();
 
 const { PORT = 3000, DB_ADDRESS = 'mongodb://127.0.0.1:27017/weblarek' } = process.env;
 
@@ -31,7 +34,7 @@ app.use(errorHandler);
 
 const start = async () => {
   await mongoose.connect(DB_ADDRESS);
-  app.listen(Number(PORT), '0.0.0.0');
+  app.listen(PORT);
 };
 
 start();
